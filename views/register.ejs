@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Practice Library</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <div class="container">
+      <fieldset>
+        <legend>Register:</legend>
+        <!--- First, Last, Username, EMail, Pass -->
+        <form action="/register" method="post">
+          <input name="first_name" type="text" class="ghost-input" placeholder="Type your first name here..." required><br>
+          <input name="last_name" type="text" class="ghost-input" placeholder="Type your last name here..." required><br>
+          <input name="username" type="text" class="ghost-input" placeholder="Type your username here..." required><br>
+          <input name="email" type="text" class="ghost-input" placeholder="Type your email here..." required><br>
+          <input name="password" type="password" class="ghost-input" placeholder="Type your password here..." required><br>
+          <input type="submit" class="ghost-button" value="Submit">
+        </form>
+      </fieldset>
+    </div>
+  </body>
+</html>

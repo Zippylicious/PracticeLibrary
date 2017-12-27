@@ -41,7 +41,6 @@ exports.register = function(req, res){
 	}
 
 	//check for duplicate emails and usernames
-	console.log("USername");
 	connection.query("SELECT * FROM users WHERE username = ?", [user.username], function(err, results){
 		if(err){
 			console.log("Error checking for username duplicates: " + err);
@@ -52,7 +51,6 @@ exports.register = function(req, res){
 			}
 		}
 
-			console.log("Email");
 			connection.query("SELECT * FROM users WHERE email = ?", [user.email], function(err, results){
 				if(err){
 					console.log("Error checking for username duplicates: " + err);
@@ -63,7 +61,6 @@ exports.register = function(req, res){
 					}
 				}
 
-					console.log("Inster");
 					connection.query("INSERT INTO users SET ?", user, function(err, results){
 						if(err){
 							console.log("Error inserting into users" + err);
@@ -95,13 +92,25 @@ exports.login = function(req, res){
 			if(results.length != 0){
 				var password = results[0].password;
 				if(passHash.verify(req.body.password, password)){
-					return res.render('index'); //add in message and session stuff here
+					var sess = req.session;
+					sess.username = req.body.username;
+					return res.render('index', {message: "Hello " + sess.username + ". Welcome to The Practice Library."}); //add in message and session stuff here
 				} else {
 					return res.render('login', {message: "Your username and password did not match, please try again."});
 				}
 			} else {
 				return res.render('login', {message: "Your username and password did not match, please try again."});
 			}
+		}
+	});
+};
+
+exports.logout = function(req, res){
+	req.session.destroy(function(err){
+		if(err){
+			console.log("Error destroying user session: " + err);
+		} else {
+			return res.render('login', {message: "You have been successfully logged out!"});
 		}
 	});
 };

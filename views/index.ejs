@@ -8,7 +8,14 @@
   </head>
   <body>
     <div class="container">
-      <h1>You have logged in</h1>
+      <% if(message) { %>
+        <h1><%= message %></h1>
+      <% } else { %>
+        <h1>You have logged in</h1>
+      <% } %>
+      <form action="/logout" method="POST">
+        <input type="submit" class="ghost-button" value="Log Out">
+      </form>
     </div>
   </body>
 </html>
